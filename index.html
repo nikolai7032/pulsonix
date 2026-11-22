@@ -27,16 +27,27 @@ body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color
 .part-label{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);
   margin:16px 0 4px;padding-left:4px;border-top:1px solid var(--border);padding-top:12px;}
 .part-label:first-of-type{border-top:none;margin-top:4px;padding-top:0;}
-#toc{list-style:none;margin:0;padding:0;}
-#toc li{margin:0;}
-#toc a{display:block;padding:5px 8px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:13.5px;
-  white-space:normal;}
-#toc a:hover{background:var(--panel2);color:var(--text);}
-#toc a.active{background:#213040;color:#fff;}
-.toc-l1 a{font-weight:600;color:#d7dbe3;margin-top:6px;}
-.toc-l2 a{padding-left:20px;font-size:13px;}
-.toc-l3 a{padding-left:34px;font-size:12.5px;color:#838c9c;}
-.toc-highlight a{font-weight:800!important;color:#ffd166!important;}
+.toc-controls{display:flex;gap:8px;margin-bottom:8px;}
+.toc-controls button{flex:1;font-size:11.5px;padding:5px 6px;border-radius:6px;border:1px solid var(--border);
+  background:var(--panel2);color:var(--muted);cursor:pointer;}
+.toc-controls button:hover{color:#fff;border-color:var(--accent);}
+.toc-root{margin:0;padding:0;}
+.chap-toggle{margin:0;border-radius:6px;}
+.chap-toggle > summary{list-style:none;cursor:pointer;display:block;padding:0;position:relative;}
+.chap-toggle > summary::-webkit-details-marker{display:none;}
+.chap-toggle > summary::before{content:"▸";position:absolute;left:-2px;top:7px;font-size:10px;color:var(--muted);
+  transition:transform .15s;}
+.chap-toggle[open] > summary::before{transform:rotate(90deg);}
+.chap-children{list-style:none;margin:0 0 4px 0;padding:0;}
+.chap-children li{margin:0;}
+.toc-root a{display:block;padding:5px 8px 5px 16px;border-radius:6px;color:var(--muted);
+  text-decoration:none;font-size:13.5px;white-space:normal;}
+.toc-root a:hover{background:var(--panel2);color:var(--text);}
+.toc-root a.active{background:#213040;color:#fff;}
+.toc-l1 a{font-weight:600;color:#ffd166;margin-top:2px;padding-left:16px;}
+.toc-l2 a{padding-left:28px;font-size:13px;}
+.toc-l3 a{padding-left:42px;font-size:12.5px;color:#838c9c;}
+.toc-highlight a{font-weight:800!important;color:lime!important;}
 .keycell{display:inline-block;font-size:1.25em;font-weight:700;color:#ffd166;background:#2a2416;
   border:1px solid #6b5a1f;border-radius:5px;padding:2px 8px;}
 .verstag{display:inline-block;background:#213040;color:#7fd1b9;border-radius:10px;padding:2px 9px;
@@ -85,51 +96,93 @@ header.titleblock .meta{color:var(--muted);font-size:13.5px;}
 <div class="layout">
   <nav id="sidebar">
     <h1>Pulsonix 14 — справочник</h1>
-    <div class="subtitle">Исчерпывающий справочник · <span class="verstag">v0.0.5 от 22.11.2026</span></div>
+    <div class="subtitle">Исчерпывающий справочник · <span class="verstag">v0.0.6 от 22.11.2026</span></div>
     <input id="searchbox" type="text" placeholder="Поиск по разделам…">
+    <div class="toc-controls">
+      <button type="button" id="expandAllBtn">Развернуть всё</button>
+      <button type="button" id="collapseAllBtn">Свернуть всё</button>
+    </div>
     <div class="part-label">Часть A · Общее руководство (гл. 1–17)</div>
-    <ul id="toc">
-      <li class="toc-l1"><a href="#1-назначение-и-область-применения" data-target="1-назначение-и-область-применения">1. Назначение и область применения</a></li>
+    <div class="toc-root">
+      <details class="chap-toggle" data-chap="1-назначение-и-область-применения">
+<summary class="toc-l1 "><a href="#1-назначение-и-область-применения" data-target="1-назначение-и-область-применения">1. Назначение и область применения</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#11-что-понимается-под-corporate-edition" data-target="11-что-понимается-под-corporate-edition">1.1. Что понимается под Corporate Edition</a></li>
-<li class="toc-l1"><a href="#2-интерфейс-и-базовая-навигация" data-target="2-интерфейс-и-базовая-навигация">2. Интерфейс и базовая навигация</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="2-интерфейс-и-базовая-навигация">
+<summary class="toc-l1 "><a href="#2-интерфейс-и-базовая-навигация" data-target="2-интерфейс-и-базовая-навигация">2. Интерфейс и базовая навигация</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#21-главное-окно" data-target="21-главное-окно">2.1. Главное окно</a></li>
 <li class="toc-l2"><a href="#22-светлая-и-тёмная-тема" data-target="22-светлая-и-тёмная-тема">2.2. Светлая и тёмная тема</a></li>
 <li class="toc-l2"><a href="#23-докируемые-окна-и-браузеры" data-target="23-докируемые-окна-и-браузеры">2.3. Докируемые окна и браузеры</a></li>
 <li class="toc-l2"><a href="#24-мышь" data-target="24-мышь">2.4. Мышь</a></li>
 <li class="toc-l2"><a href="#25-способы-выделения" data-target="25-способы-выделения">2.5. Способы выделения</a></li>
-<li class="toc-l1"><a href="#3-настройка-среды-и-проекта" data-target="3-настройка-среды-и-проекта">3. Настройка среды и проекта</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="3-настройка-среды-и-проекта">
+<summary class="toc-l1 "><a href="#3-настройка-среды-и-проекта" data-target="3-настройка-среды-и-проекта">3. Настройка среды и проекта</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#31-папки-setup-folders" data-target="31-папки-setup-folders">3.1. Папки (Setup → Folders)</a></li>
 <li class="toc-l2"><a href="#32-единицы-и-сетки" data-target="32-единицы-и-сетки">3.2. Единицы и сетки</a></li>
 <li class="toc-l2"><a href="#33-параметры-tools-options-клавиша-o" data-target="33-параметры-tools-options-клавиша-o">3.3. Параметры (Tools → Options, клавиша O)</a></li>
 <li class="toc-l2"><a href="#34-резервные-копии" data-target="34-резервные-копии">3.4. Резервные копии</a></li>
 <li class="toc-l2"><a href="#35-перенос-настроек-на-другой-пк" data-target="35-перенос-настроек-на-другой-пк">3.5. Перенос настроек на другой ПК</a></li>
-<li class="toc-l1"><a href="#4-создание-и-ведение-проекта" data-target="4-создание-и-ведение-проекта">4. Создание и ведение проекта</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="4-создание-и-ведение-проекта">
+<summary class="toc-l1 "><a href="#4-создание-и-ведение-проекта" data-target="4-создание-и-ведение-проекта">4. Создание и ведение проекта</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#41-порядок-создания" data-target="41-порядок-создания">4.1. Порядок создания</a></li>
 <li class="toc-l2"><a href="#42-связь-схемы-и-платы" data-target="42-связь-схемы-и-платы">4.2. Связь схемы и платы</a></li>
-<li class="toc-l1"><a href="#5-принципиальная-схема-schematic" data-target="5-принципиальная-схема-schematic">5. Принципиальная схема (Schematic)</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="5-принципиальная-схема-schematic">
+<summary class="toc-l1 "><a href="#5-принципиальная-схема-schematic" data-target="5-принципиальная-схема-schematic">5. Принципиальная схема (Schematic)</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#51-подготовка" data-target="51-подготовка">5.1. Подготовка</a></li>
 <li class="toc-l2"><a href="#52-размещение-компонентов" data-target="52-размещение-компонентов">5.2. Размещение компонентов</a></li>
 <li class="toc-l2"><a href="#53-соединения" data-target="53-соединения">5.3. Соединения</a></li>
 <li class="toc-l2"><a href="#54-иерархия" data-target="54-иерархия">5.4. Иерархия</a></li>
 <li class="toc-l2"><a href="#55-проверка-erc" data-target="55-проверка-erc">5.5. Проверка ERC</a></li>
-<li class="toc-l1"><a href="#6-библиотеки-компонентов" data-target="6-библиотеки-компонентов">6. Библиотеки компонентов</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="6-библиотеки-компонентов">
+<summary class="toc-l1 "><a href="#6-библиотеки-компонентов" data-target="6-библиотеки-компонентов">6. Библиотеки компонентов</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#61-структура-данных" data-target="61-структура-данных">6.1. Структура данных</a></li>
 <li class="toc-l2"><a href="#62-создание-нового-элемента" data-target="62-создание-нового-элемента">6.2. Создание нового элемента</a></li>
 <li class="toc-l2"><a href="#63-контрольный-список-проверки-посадочного-места" data-target="63-контрольный-список-проверки-посадочного-места">6.3. Контрольный список проверки посадочного места</a></li>
-<li class="toc-l1"><a href="#7-передача-схемы-в-pcb-и-синхронизация" data-target="7-передача-схемы-в-pcb-и-синхронизация">7. Передача схемы в PCB и синхронизация</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="7-передача-схемы-в-pcb-и-синхронизация">
+<summary class="toc-l1 "><a href="#7-передача-схемы-в-pcb-и-синхронизация" data-target="7-передача-схемы-в-pcb-и-синхронизация">7. Передача схемы в PCB и синхронизация</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#71-перевод-схемы-в-плату-translate-to-pcb" data-target="71-перевод-схемы-в-плату-translate-to-pcb">7.1. Перевод схемы в плату (Translate To PCB)</a></li>
 <li class="toc-l2"><a href="#72-синхронизация-synchronise-designs" data-target="72-синхронизация-synchronise-designs">7.2. Синхронизация (Synchronise Designs)</a></li>
 <li class="toc-l2"><a href="#73-обратная-аннотация-back-annotate" data-target="73-обратная-аннотация-back-annotate">7.3. Обратная аннотация (Back Annotate)</a></li>
 <li class="toc-l2"><a href="#74-защита-платы-и-полный-обратный-eco" data-target="74-защита-платы-и-полный-обратный-eco">7.4. Защита платы и полный обратный ECO</a></li>
-<li class="toc-l1"><a href="#8-проектирование-печатной-платы" data-target="8-проектирование-печатной-платы">8. Проектирование печатной платы</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="8-проектирование-печатной-платы">
+<summary class="toc-l1 "><a href="#8-проектирование-печатной-платы" data-target="8-проектирование-печатной-платы">8. Проектирование печатной платы</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#81-технология-и-слои" data-target="81-технология-и-слои">8.1. Технология и слои</a></li>
 <li class="toc-l2"><a href="#82-контур-платы" data-target="82-контур-платы">8.2. Контур платы</a></li>
 <li class="toc-l2"><a href="#83-размещение-компонентов" data-target="83-размещение-компонентов">8.3. Размещение компонентов</a></li>
 <li class="toc-l2"><a href="#84-трассировка" data-target="84-трассировка">8.4. Трассировка</a></li>
-<li class="toc-l1"><a href="#9-проверка-проекта-и-выпуск-производственных-файлов" data-target="9-проверка-проекта-и-выпуск-производственных-файлов">9. Проверка проекта и выпуск производственных файлов</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="9-проверка-проекта-и-выпуск-производственных-файлов">
+<summary class="toc-l1 "><a href="#9-проверка-проекта-и-выпуск-производственных-файлов" data-target="9-проверка-проекта-и-выпуск-производственных-файлов">9. Проверка проекта и выпуск производственных файлов</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#91-проверки-перед-выпуском" data-target="91-проверки-перед-выпуском">9.1. Проверки перед выпуском</a></li>
 <li class="toc-l2"><a href="#92-выходные-файлы" data-target="92-выходные-файлы">9.2. Выходные файлы</a></li>
-<li class="toc-l1 toc-highlight"><a href="#10-горячие-клавиши-keyboard-shortcuts" data-target="10-горячие-клавиши-keyboard-shortcuts">10. Горячие клавиши (Keyboard Shortcuts)</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="10-горячие-клавиши-keyboard-shortcuts">
+<summary class="toc-l1 toc-highlight"><a href="#10-горячие-клавиши-keyboard-shortcuts" data-target="10-горячие-клавиши-keyboard-shortcuts">10. Горячие клавиши (Keyboard Shortcuts)</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#101-вид-и-навигация" data-target="101-вид-и-навигация">10.1. Вид и навигация</a></li>
 <li class="toc-l2"><a href="#102-файлы-и-программа" data-target="102-файлы-и-программа">10.2. Файлы и программа</a></li>
 <li class="toc-l2"><a href="#103-правка-и-выделение" data-target="103-правка-и-выделение">10.3. Правка и выделение</a></li>
@@ -140,7 +193,11 @@ header.titleblock .meta{color:var(--muted);font-size:13.5px;}
 <li class="toc-l2"><a href="#108-мышь-при-трассировке-pcb" data-target="108-мышь-при-трассировке-pcb">10.8. Мышь при трассировке (PCB)</a></li>
 <li class="toc-l2"><a href="#109-проверка" data-target="109-проверка">10.9. Проверка</a></li>
 <li class="toc-l2"><a href="#1010-моделирование-pulsonixsim" data-target="1010-моделирование-pulsonixsim">10.10. Моделирование (PulsonixSim)</a></li>
-<li class="toc-l1"><a href="#11-справочник-команд-commands-reference" data-target="11-справочник-команд-commands-reference">11. Справочник команд (Commands Reference)</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="11-справочник-команд-commands-reference">
+<summary class="toc-l1 "><a href="#11-справочник-команд-commands-reference" data-target="11-справочник-команд-commands-reference">11. Справочник команд (Commands Reference)</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#111-file-файлы-и-документы" data-target="111-file-файлы-и-документы">11.1. File — файлы и документы</a></li>
 <li class="toc-l2"><a href="#112-edit-правка" data-target="112-edit-правка">11.2. Edit — правка</a></li>
 <li class="toc-l2"><a href="#113-view-вид" data-target="113-view-вид">11.3. View — вид</a></li>
@@ -155,16 +212,28 @@ header.titleblock .meta{color:var(--muted);font-size:13.5px;}
 <li class="toc-l2"><a href="#1112-libraries-библиотеки" data-target="1112-libraries-библиотеки">11.12. Libraries — библиотеки</a></li>
 <li class="toc-l2"><a href="#1113-database-vault-корпоративные-модули" data-target="1113-database-vault-корпоративные-модули">11.13. Database / Vault — корпоративные модули</a></li>
 <li class="toc-l2"><a href="#1114-help-справка" data-target="1114-help-справка">11.14. Help — справка</a></li>
-<li class="toc-l1"><a href="#12-как-выгрузить-отчёты-из-своей-установки" data-target="12-как-выгрузить-отчёты-из-своей-установки">12. Как выгрузить отчёты из своей установки</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="12-как-выгрузить-отчёты-из-своей-установки">
+<summary class="toc-l1 "><a href="#12-как-выгрузить-отчёты-из-своей-установки" data-target="12-как-выгрузить-отчёты-из-своей-установки">12. Как выгрузить отчёты из своей установки</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#121-отчёт-горячих-клавиш" data-target="121-отчёт-горячих-клавиш">12.1. Отчёт горячих клавиш</a></li>
 <li class="toc-l2"><a href="#122-перечень-команд" data-target="122-перечень-команд">12.2. Перечень команд</a></li>
 <li class="toc-l2"><a href="#123-таблица-отличий-от-стандарта" data-target="123-таблица-отличий-от-стандарта">12.3. Таблица отличий от стандарта</a></li>
-<li class="toc-l1"><a href="#13-корпоративная-конфигурация-и-общие-ресурсы" data-target="13-корпоративная-конфигурация-и-общие-ресурсы">13. Корпоративная конфигурация и общие ресурсы</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="13-корпоративная-конфигурация-и-общие-ресурсы">
+<summary class="toc-l1 "><a href="#13-корпоративная-конфигурация-и-общие-ресурсы" data-target="13-корпоративная-конфигурация-и-общие-ресурсы">13. Корпоративная конфигурация и общие ресурсы</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#131-сетевое-лицензирование-nls" data-target="131-сетевое-лицензирование-nls">13.1. Сетевое лицензирование (NLS)</a></li>
 <li class="toc-l2"><a href="#132-pulsonix-vault" data-target="132-pulsonix-vault">13.2. Pulsonix Vault</a></li>
 <li class="toc-l2"><a href="#133-database-connection-pdc" data-target="133-database-connection-pdc">13.3. Database Connection (PDC)</a></li>
 <li class="toc-l2"><a href="#134-перед-выпуском-финальной-редакции-уточните" data-target="134-перед-выпуском-финальной-редакции-уточните">13.4. Перед выпуском финальной редакции уточните</a></li>
-<li class="toc-l1"><a href="#14-работа-с-pulsonix-vault" data-target="14-работа-с-pulsonix-vault">14. Работа с Pulsonix Vault</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="14-работа-с-pulsonix-vault">
+<summary class="toc-l1 "><a href="#14-работа-с-pulsonix-vault" data-target="14-работа-с-pulsonix-vault">14. Работа с Pulsonix Vault</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#141-устройство" data-target="141-устройство">14.1. Устройство</a></li>
 <li class="toc-l2"><a href="#142-что-хранится-в-vault" data-target="142-что-хранится-в-vault">14.2. Что хранится в Vault</a></li>
 <li class="toc-l2"><a href="#143-четыре-основных-действия" data-target="143-четыре-основных-действия">14.3. Четыре основных действия</a></li>
@@ -177,13 +246,29 @@ header.titleblock .meta{color:var(--muted);font-size:13.5px;}
 <li class="toc-l2"><a href="#148-подключение-не-работает-проверка-odbc" data-target="148-подключение-не-работает-проверка-odbc">14.8. Подключение не работает: проверка ODBC</a></li>
 <li class="toc-l2"><a href="#149-администрирование-для-справки" data-target="149-администрирование-для-справки">14.9. Администрирование (для справки)</a></li>
 <li class="toc-l2"><a href="#1410-vault-и-database-connection-pdc" data-target="1410-vault-и-database-connection-pdc">14.10. Vault и Database Connection (PDC)</a></li>
-<li class="toc-l1"><a href="#15-диагностика-и-типовые-проблемы" data-target="15-диагностика-и-типовые-проблемы">15. Диагностика и типовые проблемы</a></li>
-<li class="toc-l1"><a href="#16-глоссарий-терминов" data-target="16-глоссарий-терминов">16. Глоссарий терминов</a></li>
-<li class="toc-l1"><a href="#17-источники" data-target="17-источники">17. Источники</a></li>
-    </ul>
-    <div class="part-label">Часть B · Практические разборы и доп. сведения (гл. 18–20)</div>
-    <ul>
-      <li class="toc-l1"><a href="#b-intro" data-target="b-intro">18. Практические разборы: OrCAD → Pulsonix</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="15-диагностика-и-типовые-проблемы">
+<summary class="toc-l1 "><a href="#15-диагностика-и-типовые-проблемы" data-target="15-диагностика-и-типовые-проблемы">15. Диагностика и типовые проблемы</a></summary>
+<ul class="chap-children">
+</ul>
+</details>
+<details class="chap-toggle" data-chap="16-глоссарий-терминов">
+<summary class="toc-l1 "><a href="#16-глоссарий-терминов" data-target="16-глоссарий-терминов">16. Глоссарий терминов</a></summary>
+<ul class="chap-children">
+</ul>
+</details>
+<details class="chap-toggle" data-chap="17-источники">
+<summary class="toc-l1 "><a href="#17-источники" data-target="17-источники">17. Источники</a></summary>
+<ul class="chap-children">
+</ul>
+</details>
+    </div>
+    <div class="part-label">Часть B · Практические разборы и доп. сведения (гл. 18–21)</div>
+    <div class="toc-root">
+      <details class="chap-toggle" data-chap="b-intro">
+<summary class="toc-l1 "><a href="#b-intro" data-target="b-intro">18. Практические разборы: OrCAD → Pulsonix</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#b-orcad-prep" data-target="b-orcad-prep">18.1. Подготовка в OrCAD</a></li>
 <li class="toc-l2"><a href="#b-translate-errors" data-target="b-translate-errors">18.2. Translate To PCB: ошибки</a></li>
 <li class="toc-l3"><a href="#b-err-nofp" data-target="b-err-nofp">Нет футпринта у Part</a></li>
@@ -214,22 +299,36 @@ header.titleblock .meta{color:var(--muted);font-size:13.5px;}
 <li class="toc-l3"><a href="#b-pcb-rules" data-target="b-pcb-rules">Design Rules — где искать</a></li>
 <li class="toc-l3"><a href="#b-pcb-more" data-target="b-pcb-more">Прочие задачи PCB</a></li>
 <li class="toc-l2"><a href="#b-led" data-target="b-led">18.11. Кейс: LED-индикатор BD-F304RD</a></li>
-<li class="toc-l1"><a href="#b-general" data-target="b-general">19. Дополнительные модули и сведения</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="b-general">
+<summary class="toc-l1 "><a href="#b-general" data-target="b-general">19. Дополнительные модули и сведения</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#b-pdc" data-target="b-pdc">19.1. Database Connection (PDC)</a></li>
 <li class="toc-l2"><a href="#b-nls" data-target="b-nls">19.2. Сетевые лицензии (NLS)</a></li>
 <li class="toc-l2"><a href="#b-libtoolkit" data-target="b-libtoolkit">19.3. Library Integration Toolkit</a></li>
 <li class="toc-l2"><a href="#b-update14" data-target="b-update14">19.4. По материалам Update Notes 14.0</a></li>
-<li class="toc-l1"><a href="#b-autorouting" data-target="b-autorouting">20. Сторонний полезный софт: автотрассировка</a></li>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="b-autorouting">
+<summary class="toc-l1 "><a href="#b-autorouting" data-target="b-autorouting">20. Сторонний полезный софт: автотрассировка</a></summary>
+<ul class="chap-children">
 <li class="toc-l2"><a href="#b-ar-builtin" data-target="b-ar-builtin">20.1. Что есть в самом Pulsonix</a></li>
 <li class="toc-l2"><a href="#b-ar-experience" data-target="b-ar-experience">20.2. Общий опыт по автотрассировке</a></li>
 <li class="toc-l2"><a href="#b-ar-free" data-target="b-ar-free">20.3. Бесплатные автотрассировщики</a></li>
-<li class="toc-l1"><a href="#b-about" data-target="b-about">21. Об этом справочнике</a></li>
-    </ul>
+</ul>
+</details>
+<details class="chap-toggle" data-chap="b-about">
+<summary class="toc-l1 "><a href="#b-about" data-target="b-about">21. Об этом справочнике</a></summary>
+<ul class="chap-children">
+</ul>
+</details>
+    </div>
   </nav>
   <main id="content">
     <header class="titleblock">
       <h1>Справочник по Pulsonix 14 Corporate</h1>
-      <div class="meta">Объединяет общее руководство по работе в Pulsonix 14 Corporate с практическими разборами реальных рабочих ситуаций (перенос схемы из OrCAD, библиотеки, PCB). Названия команд и меню — на английском, как в программе; описания — на русском. Автор — см. главу 21. <span class="verstag">v0.0.5 от 22.11.2026</span></div>
+      <div class="meta">Объединяет общее руководство по работе в Pulsonix 14 Corporate с практическими разборами реальных рабочих ситуаций (перенос схемы из OrCAD, библиотеки, PCB). Названия команд и меню — на английском, как в программе; описания — на русском. Автор — см. главу 21. <span class="verstag">v0.0.6 от 22.11.2026</span></div>
     </header>
     <section id="1-назначение-и-область-применения" class="chapter" data-part="A">
 <h2>1. Назначение и область применения</h2>
@@ -575,17 +674,27 @@ header.titleblock .meta{color:var(--muted);font-size:13.5px;}
 <script>
 (function(){
   var search = document.getElementById('searchbox');
-  var items = document.querySelectorAll('#toc li');
+  var chapters = document.querySelectorAll('.chap-toggle');
+  var links = document.querySelectorAll('.toc-root a');
+
   search.addEventListener('input', function(){
     var q = search.value.trim().toLowerCase();
-    items.forEach(function(li){
-      var t = li.textContent.toLowerCase();
-      li.style.display = (!q || t.indexOf(q) !== -1) ? '' : 'none';
+    chapters.forEach(function(chap){
+      var summaryLi = chap.querySelector('summary');
+      var children = chap.querySelectorAll('.chap-children li');
+      var chapMatches = summaryLi.textContent.toLowerCase().indexOf(q) !== -1;
+      var anyChildVisible = false;
+      children.forEach(function(li){
+        var t = li.textContent.toLowerCase();
+        var show = !q || t.indexOf(q) !== -1;
+        li.style.display = show ? '' : 'none';
+        if (show) anyChildVisible = true;
+      });
+      var showChapter = !q || chapMatches || anyChildVisible;
+      chap.style.display = showChapter ? '' : 'none';
+      if (q && anyChildVisible) chap.open = true;
     });
   });
-
-  var links = document.querySelectorAll('#toc a');
-  var sections = document.querySelectorAll('.chapter, [id^="1"], [id^="b-"]');
 
   function setActive(id){
     links.forEach(function(a){
@@ -593,7 +702,8 @@ header.titleblock .meta{color:var(--muted);font-size:13.5px;}
     });
   }
   links.forEach(function(a){
-    a.addEventListener('click', function(){
+    a.addEventListener('click', function(e){
+      e.stopPropagation();
       setActive(a.getAttribute('data-target'));
       document.getElementById('sidebar').classList.remove('open');
     });
@@ -604,15 +714,28 @@ header.titleblock .meta{color:var(--muted);font-size:13.5px;}
     document.getElementById('sidebar').classList.toggle('open');
   });
 
-  // highlight current section on scroll
-  var allHeadIds = Array.prototype.map.call(document.querySelectorAll('[id]'), function(e){return e.id;});
+  var expandBtn = document.getElementById('expandAllBtn');
+  var collapseBtn = document.getElementById('collapseAllBtn');
+  expandBtn.addEventListener('click', function(){ chapters.forEach(function(c){ c.open = true; }); });
+  collapseBtn.addEventListener('click', function(){ chapters.forEach(function(c){ c.open = false; }); });
+
+  // highlight current section on scroll, and auto-expand its chapter
+  var lastOpened = null;
   window.addEventListener('scroll', function(){
     var best = null, bestTop = -Infinity;
     document.querySelectorAll('h2[id], h3[id], h4[id]').forEach(function(h){
       var top = h.getBoundingClientRect().top;
       if (top <= 90 && top > bestTop){ bestTop = top; best = h.id; }
     });
-    if (best) setActive(best);
+    if (best){
+      setActive(best);
+      var link = document.querySelector('.toc-root a[data-target="' + best + '"]');
+      var chap = link ? link.closest('.chap-toggle') : null;
+      if (chap && chap !== lastOpened){
+        chap.open = true;
+        lastOpened = chap;
+      }
+    }
   }, {passive:true});
 })();
 </script>
